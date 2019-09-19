@@ -1,0 +1,23 @@
+dist: xenial
+language: python
+sudo: false
+python:
+- 3.6
+- 3.7
+install:
+- pip install -U pip setuptools
+- pip install -U pipenv codecov
+- pip install -e .
+- pipenv install --dev --skip-lock --system
+script: pytest --cov=aioworkers
+before_deploy:
+- echo "__version__ = '$(git describe --tags)'" > aioworkers_prometheus/version.py
+deploy:
+  provider: pypi
+  user: yttrium
+  on:
+    tags: true
+    condition: "$TRAVIS_PYTHON_VERSION = 3.6"
+  skip_cleanup: true
+  password:
+    secure: GlR1Ajow0x36tTxHIU8pKBmif7EAp1JEnc4isjvOz/omv4+dQboIGOqaRI0JdJnD782dIYPkewkujTqFYl28gWEix30QaACSDWS3mIezA0IAvpX67qzYDe/5Naj/9XarIbP3wGa2OUbSHykEUqxm2pDAQP+nGoA1hdrEFNJnf7M19lPJxIu0vh0lL7ufSh5AcDmSvtPpY91GifHAWsTuIqHHM80sxosIOBnzPKRS9QX2CBO5lJP/WVMqMJsrop9oWFeOrfbhu+W6UvvQ7mJW5bo9j4nH6D2PaEDi8E88sab0UepB8ASGh5Zf9/Hllzbrw8XMuvNwwNZf/mlicKkK9yJoMkooR9B9c5PKC/X00mv7SXLeISFsUHvkJcXIcpHktOcRT+pWlId4UjUyW2mR6xumIb6efqQfEa+vhwhEMrvXZsPTdFRGcyo17W1xuTrSwvQiS37VBfXHtcn+XL2Li6flH6ERh9Hp/fyybMnUoQTr5yDgE1UxTOD2k6N7XDA7cpWf/1dgm6GCmfjNrkdssqHmHstUYQzXagwioe25dWo7+5agLILlDnDlWrYh5g/adEHpW3G5DlEADLpA10GaEpgMVXBju04cZakPjQONNcEakpkSfOGwJNIqBGFJJ+8CqN2sJK8rLkkWLCMNCHkIjZgE8r7jY91XdXrFQVlQ/c8=
