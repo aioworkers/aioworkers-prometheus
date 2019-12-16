@@ -8,6 +8,8 @@ def config_yaml():
     prometheus:
         cls: aioworkers_prometheus.service.Service
         port: 8000
+        graphite:
+            address: localhost:8000
     """
 
 
