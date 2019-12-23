@@ -5,18 +5,24 @@ from typing import Dict
 from aioworkers.core.base import LoggingEntity
 
 # true
-from .metrics import Counter, Enum, Gauge, Histogram, Info, QueueMetric, Summary
+from . import MULTIPROC_DIR
+from .metrics import QueueMetric
 from .registry import REGISTRY, Receiver, get_registry
+
+if MULTIPROC_DIR:
+    from prometheus_client import metrics
+else:
+    from . import metrics
 
 
 class Metric(LoggingEntity):
     METRICS = dict(
-        counter=Counter,
-        enum=Enum,
-        gauge=Gauge,
-        histogram=Histogram,
-        info=Info,
-        summary=Summary,
+        counter=metrics.Counter,
+        enum=metrics.Enum,
+        gauge=metrics.Gauge,
+        histogram=metrics.Histogram,
+        info=metrics.Info,
+        summary=metrics.Summary,
     )
 
     def __init__(self, *args, **kwargs):
@@ -42,5 +48,5 @@ class Metric(LoggingEntity):
             setattr(self, attr, metric)
 
     async def init(self):
-        QueueMetric.fork = self._pid != os.getpid()
+        QueueMetric.fork = not MULTIPROC_DIR and self._pid != os.getpid()
         await super().init()
