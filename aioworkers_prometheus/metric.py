@@ -5,14 +5,9 @@ from typing import Dict
 from aioworkers.core.base import LoggingEntity
 
 # true
-from . import MULTIPROC_DIR
+from . import MULTIPROC_DIR, metrics
 from .metrics import QueueMetric
 from .registry import REGISTRY, Receiver, get_registry
-
-if MULTIPROC_DIR:
-    from prometheus_client import metrics
-else:
-    from . import metrics
 
 
 class Metric(LoggingEntity):
