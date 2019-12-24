@@ -1,8 +1,7 @@
+from aioworkers.core.base import AbstractEntity
 from prometheus_client.bridge.graphite import GraphiteBridge
 from prometheus_client.exposition import generate_latest, start_http_server
 from prometheus_client.multiprocess import MultiProcessCollector
-
-from aioworkers.core.base import AbstractEntity
 
 # true
 from . import MULTIPROC_DIR
