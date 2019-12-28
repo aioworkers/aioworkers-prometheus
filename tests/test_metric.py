@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 
@@ -41,8 +39,7 @@ async def test_counter(context):
     assert 45 == context.metric.counter._value.get()
 
     c = context.metric.counter
-    c.send_msg(0, 4)
-    time.sleep(2)
+    c.inc(4)
     assert 49 == c._value.get()
 
     g = context.metric.gauge

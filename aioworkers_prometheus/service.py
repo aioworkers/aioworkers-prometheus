@@ -1,4 +1,4 @@
-from aioworkers.core.base import AbstractEntity
+from aioworkers.core.base import ExecutorEntity
 from prometheus_client.bridge.graphite import GraphiteBridge
 from prometheus_client.exposition import generate_latest, start_http_server
 from prometheus_client.multiprocess import MultiProcessCollector
@@ -8,7 +8,7 @@ from . import MULTIPROC_DIR
 from .registry import REGISTRY, get_registry
 
 
-class Service(AbstractEntity):
+class Service(ExecutorEntity):
     _registry = None
 
     def set_config(self, config):
@@ -33,5 +33,5 @@ class Service(AbstractEntity):
             prefix = graphite.get('prefix', '')
             gb.start(interval, prefix=prefix)
 
-    def generate_latest(self):
-        return generate_latest(self._registry)
+    async def generate_latest(self):
+        return await self.run_in_executor(generate_latest, self._registry)
