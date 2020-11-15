@@ -1,15 +1,19 @@
 aioworkers-prometheus
 =====================
 
-.. image:: https://travis-ci.org/aioworkers/aioworkers-prometheus.svg?branch=master
-  :target: https://travis-ci.org/aioworkers/aioworkers-prometheus
+.. image:: https://github.com/aioworkers/aioworkers-prometheus/workflows/Tests/badge.svg
+  :target: https://github.com/aioworkers/aioworkers-prometheus/actions?query=workflow%3ATests
 
-.. image:: https://img.shields.io/pypi/pyversions/aioworkers-prometheus.svg
-  :target: https://pypi.python.org/pypi/aioworkers-prometheus
-  :alt: Python versions
+.. image:: https://codecov.io/gh/aioworkers/aioworkers-prometheus/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/aioworkers/aioworkers-prometheus
 
 .. image:: https://img.shields.io/pypi/v/aioworkers-prometheus.svg
-  :target: https://pypi.python.org/pypi/aioworkers-prometheus
+  :target: https://pypi.org/project/aioworkers-prometheus
+  :alt: PyPI version
+
+.. image:: https://img.shields.io/pypi/pyversions/aioworkers-prometheus.svg
+  :target: https://pypi.org/project/aioworkers-prometheus
+  :alt: Python versions
 
 
 Use
