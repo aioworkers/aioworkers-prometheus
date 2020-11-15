@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 try:
+    # true
     from .version import __version__
 except ImportError:
     __version__ = 'dev'
