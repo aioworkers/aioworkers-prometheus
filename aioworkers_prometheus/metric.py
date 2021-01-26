@@ -33,7 +33,8 @@ class Metric(LoggingEntity):
             m_registry = kw.get('registry', registry)
             kw['registry'] = get_registry(m_registry)
             m_namespace = kw.setdefault('namespace', namespace)
-            cache_key = (m_registry, m_namespace, m_name, m_type)
+            cache_key: Tuple = (m_registry, m_namespace, m_name, m_type)
+            cache_key += tuple(kw.get('labelnames', ()))
             metric: Optional[metrics.MetricWrapperBase] = self._cache.get(cache_key)
             if metric is None:
                 metric = cls(**kw)
