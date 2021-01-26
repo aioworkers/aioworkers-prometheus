@@ -28,6 +28,7 @@ class Metric(LoggingEntity):
         for attr, params in cfg_metrics.items():
             kw = dict(params)
             m_name = kw.setdefault('name', attr)
+            kw.setdefault('documentation', '')
             m_type = kw.pop('type', 'gauge')
             cls = self.METRICS[m_type]
             m_registry = kw.get('registry', registry)
