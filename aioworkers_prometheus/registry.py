@@ -5,7 +5,7 @@ from prometheus_client import registry
 
 REGISTRY = 'REGISTRY'
 
-logger = logging.getLogger('aioworkers_prometheus')
+logger = logging.getLogger(__package__)
 
 
 @lru_cache(None)
