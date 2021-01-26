@@ -17,6 +17,7 @@ class Metric(LoggingEntity):
         info=metrics.Info,
         summary=metrics.Summary,
     )
+    _cache: Dict[Tuple, metrics.MetricWrapperBase] = {}
 
     def set_config(self, config: ValueExtractor) -> None:
         cfg = config.new_parent(logger=__package__)
@@ -26,9 +27,15 @@ class Metric(LoggingEntity):
         cfg_metrics = self.config.get('metrics', {})
         for attr, params in cfg_metrics.items():
             kw = dict(params)
-            kw.setdefault('name', attr)
-            cls = self.METRICS[kw.pop('type', 'gauge')]
-            kw['registry'] = get_registry(kw.get('registry', registry))
-            kw.setdefault('namespace', namespace)
-            metric = cls(**kw)
+            m_name = kw.setdefault('name', attr)
+            m_type = kw.pop('type', 'gauge')
+            cls = self.METRICS[m_type]
+            m_registry = kw.get('registry', registry)
+            kw['registry'] = get_registry(m_registry)
+            m_namespace = kw.setdefault('namespace', namespace)
+            cache_key = (m_registry, m_namespace, m_name, m_type)
+            metric: Optional[metrics.MetricWrapperBase] = self._cache.get(cache_key)
+            if metric is None:
+                metric = cls(**kw)
+                self._cache[cache_key] = metric
             setattr(self, attr, metric)
