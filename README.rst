@@ -65,7 +65,7 @@ Push to graphite localhost:9090
       graphite:
         address: localhost:9090
         interval: 1m
-        prefix: aioworker.test
+        prefix: aioworkers.test
 
 
 Development
