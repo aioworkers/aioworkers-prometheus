@@ -8,7 +8,7 @@ aioworkers = "==0.19.1"
 prometheus-client = "==0.10.1"
 pytest = "==6.2.4"
 pytest-aioworkers = "==0.3"
-pytest-cov = "==2.11.1"
+pytest-cov = "==2.12.1"
 pyyaml = "==5.4.1"
 
 [dev-packages]
