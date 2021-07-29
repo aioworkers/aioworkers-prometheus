@@ -12,7 +12,7 @@ pytest-cov = "==2.12.1"
 pyyaml = "==5.4.1"
 
 [dev-packages]
-isort = "==5.9.2"
+isort = "==5.9.3"
 mypy = "==0.910"
 flake8 = "==3.9.2"
 
