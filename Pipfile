@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aioworkers = "==0.19.2"
+aioworkers = "==0.20"
 prometheus-client = "==0.12.0"
 pytest = "==6.2.5"
 pytest-aioworkers = "==0.3"
