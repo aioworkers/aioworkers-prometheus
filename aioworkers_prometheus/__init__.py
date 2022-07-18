@@ -7,7 +7,10 @@ try:
 except ImportError:
     __version__ = 'dev'
 
-MULTIPROC_DIR = os.environ.get('prometheus_multiproc_dir')
+MULTIPROC_DIR = os.environ.get("PROMETHEUS_MULTIPROC_DIR")
+if not MULTIPROC_DIR:
+    MULTIPROC_DIR = os.environ.get("prometheus_multiproc_dir")
+
 BASE = Path(__file__).parent
 
 configs = (
