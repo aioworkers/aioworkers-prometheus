@@ -18,7 +18,7 @@ class Service(ExecutorEntity):
         super().set_config(config)
         registry = get_registry(self.config.get('registry', REGISTRY))
         if MULTIPROC_DIR:
-            registry = MultiProcessCollector(registry)
+            MultiProcessCollector(registry)
         self._registry = registry
 
         port: int = self.config.get_int('port', default=0)
