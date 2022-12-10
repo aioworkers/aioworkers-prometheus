@@ -18,4 +18,4 @@ flake8 = "==5.0.4"
 black = "==22.6.0"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
