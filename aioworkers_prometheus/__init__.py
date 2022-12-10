@@ -5,7 +5,7 @@ try:
     # true
     from .version import __version__
 except ImportError:
-    __version__ = 'dev'
+    __version__ = "dev"
 
 MULTIPROC_DIR = os.environ.get("PROMETHEUS_MULTIPROC_DIR")
 if not MULTIPROC_DIR:
@@ -13,6 +13,4 @@ if not MULTIPROC_DIR:
 
 BASE = Path(__file__).parent
 
-configs = (
-    BASE / 'config.ini',
-)
+configs = (BASE / "config.ini",)

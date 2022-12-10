@@ -3,7 +3,7 @@ from functools import lru_cache
 
 from prometheus_client import registry
 
-REGISTRY = 'REGISTRY'
+REGISTRY = "REGISTRY"
 
 logger = logging.getLogger(__package__)
 
