@@ -13,7 +13,7 @@ pyyaml = "==6.0"
 pytest-asyncio = "*"
 
 [dev-packages]
-isort = "==5.11.3"
+isort = "==5.11.4"
 mypy = "==0.991"
 flake8 = "==5.0.4"
 black = "==22.12.0"
