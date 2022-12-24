@@ -2,6 +2,12 @@ import pytest
 
 
 @pytest.fixture
+def aioworkers(aioworkers):
+    aioworkers.plugins.default = True
+    return aioworkers
+
+
+@pytest.fixture
 def config_yaml():
     return """
     metric:
@@ -59,3 +65,7 @@ async def test_counter(context):
     data = dict(i='1')
     i.info(data)
     assert data == i._value
+
+
+async def test_run(context):
+    await context.metric.run()

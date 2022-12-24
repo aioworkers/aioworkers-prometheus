@@ -1,14 +1,18 @@
-from typing import Dict, Optional, Tuple, Type
+import multiprocessing
+from typing import Any, Dict, Optional, Tuple, Type
 
 from aioworkers.core.base import LoggingEntity
 from aioworkers.core.config import ValueExtractor
-from prometheus_client import metrics
+from aioworkers.worker.base import Worker
+from prometheus_client import PROCESS_COLLECTOR, metrics
 
 # true
+from . import MULTIPROC_DIR
 from .registry import REGISTRY, get_registry
 
 
-class Metric(LoggingEntity):
+class Metric(Worker, LoggingEntity):
+    config: ValueExtractor
     METRICS: Dict[str, Type[metrics.MetricWrapperBase]] = dict(
         counter=metrics.Counter,
         enum=metrics.Enum,
@@ -20,7 +24,11 @@ class Metric(LoggingEntity):
     _cache: Dict[Tuple, metrics.MetricWrapperBase] = {}
 
     def set_config(self, config: ValueExtractor) -> None:
-        cfg = config.new_parent(logger=__package__)
+        cfg = config.new_parent(
+            logger=__package__,
+            autorun=bool(MULTIPROC_DIR),
+            persist=True,
+        )
         super().set_config(cfg)
         registry: str = self.config.get("registry", REGISTRY)
         namespace: Optional[str] = self.config.get("namespace")
@@ -41,3 +49,9 @@ class Metric(LoggingEntity):
                 metric = cls(**kw)
                 self._cache[cache_key] = metric
             setattr(self, attr, metric)
+
+    async def run(self, value: Any = None) -> Any:
+        name = multiprocessing.current_process().name
+        for mf in PROCESS_COLLECTOR.collect():
+            m = getattr(self, mf.name).labels(name)
+            m._value.set(mf.samples[0].value)
