@@ -14,7 +14,7 @@ def config_yaml():
         cls: aioworkers_prometheus.metric.Metric
         namespace: aioworkers
         metrics:
-            counter:
+            test_counter:
                 name: test_counter
                 type: counter
                 documentation: Counter for tests
@@ -41,10 +41,10 @@ def config_yaml():
 
 async def test_counter(context):
     assert context.metric is not None
-    context.metric.counter.inc(45)
-    assert 45 == context.metric.counter._value.get()
+    context.metric.test_counter.inc(45)
+    assert 45 == context.metric.test_counter._value.get()
 
-    c = context.metric.counter
+    c = context.metric.test_counter
     c.inc(4)
     assert 49 == c._value.get()
 
@@ -58,11 +58,11 @@ async def test_counter(context):
     assert 45 == context.metric.histogram._sum.get()
 
     e = context.metric.enum
-    e.state('a')
+    e.state("a")
     assert 0 == e._value
 
     i = context.metric.info
-    data = dict(i='1')
+    data = dict(i="1")
     i.info(data)
     assert data == i._value
 
