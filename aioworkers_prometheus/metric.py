@@ -34,6 +34,8 @@ class Metric(Worker, LoggingEntity):
         namespace: Optional[str] = self.config.get("namespace")
         cfg_metrics = self.config.get("metrics", {})
         for attr, params in cfg_metrics.items():
+            if hasattr(self, attr):
+                continue
             kw = dict(params)
             m_name: str = kw.setdefault("name", attr)
             kw.setdefault("documentation", "")
