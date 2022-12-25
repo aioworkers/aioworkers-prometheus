@@ -1,17 +1,15 @@
 import multiprocessing
 from typing import Any, Dict, Optional, Tuple, Type
 
-from aioworkers.core.base import LoggingEntity
 from aioworkers.core.config import ValueExtractor
 from aioworkers.worker.base import Worker
 from prometheus_client import PROCESS_COLLECTOR, metrics
 
-# true
-from . import MULTIPROC_DIR
-from .registry import REGISTRY, get_registry
+from aioworkers_prometheus import MULTIPROC_DIR
+from aioworkers_prometheus.registry import REGISTRY, get_registry
 
 
-class Metric(Worker, LoggingEntity):
+class Metric(Worker):
     config: ValueExtractor
     METRICS: Dict[str, Type[metrics.MetricWrapperBase]] = dict(
         counter=metrics.Counter,

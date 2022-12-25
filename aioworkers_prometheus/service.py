@@ -2,6 +2,7 @@ from typing import Optional
 
 from aioworkers.core.base import ExecutorEntity
 from aioworkers.core.config import ValueExtractor
+from prometheus_client import CollectorRegistry
 from prometheus_client.bridge.graphite import GraphiteBridge
 from prometheus_client.exposition import generate_latest, start_http_server
 from prometheus_client.multiprocess import MultiProcessCollector
@@ -12,7 +13,7 @@ from .registry import REGISTRY, get_registry
 
 
 class Service(ExecutorEntity):
-    _registry = None
+    _registry: CollectorRegistry
 
     def set_config(self, config: ValueExtractor) -> None:
         super().set_config(config)
