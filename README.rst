@@ -25,11 +25,11 @@ Use
       registry: aioworkers
       namespace: aioworkers_test_metric
       metrics:
-        counter:
+        my_counter:
           type: counter
           name: test_counter
           documentation: Counter for tests
-        histogram:
+        my_histogram:
           type: histogram
           name: test_histogram
           documentation: Histogram for tests
@@ -40,10 +40,10 @@ Use in code
 
 .. code-block:: python
 
-    context.metric.counter.inc()
-    context.metric.histogram.observe(542)
+    context.metric.my_counter.inc()
+    context.metric.my_histogram.observe(542)
 
-    with context.metric.histogram.time():
+    with context.metric.my_histogram.time():
         await asyncio.sleep(1)
 
 
