@@ -8,7 +8,7 @@ from prometheus_client.exposition import generate_latest, start_http_server
 from prometheus_client.multiprocess import MultiProcessCollector
 
 from aioworkers_prometheus import MULTIPROC_DIR
-from aioworkers_prometheus.registry import REGISTRY, LabelsRegistry, get_registry
+from aioworkers_prometheus.registry import REGISTRY, CollectorWithLabels, get_registry
 
 
 class Service(ExecutorEntity):
@@ -23,7 +23,7 @@ class Service(ExecutorEntity):
         if labels:
             registry = cast(
                 CollectorRegistry,
-                LabelsRegistry(
+                CollectorWithLabels(
                     registry=registry,
                     labels=labels,
                 ),

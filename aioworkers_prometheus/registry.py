@@ -18,7 +18,7 @@ def get_registry(name: str = REGISTRY) -> r.CollectorRegistry:
         return r.CollectorRegistry(auto_describe=True)
 
 
-class LabelsRegistry(r.Collector):
+class CollectorWithLabels(r.Collector):
     def __init__(self, registry: r.Collector, labels: Mapping[str, str]):
         self._registry = registry
         self._labels = labels
