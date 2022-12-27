@@ -22,7 +22,7 @@ class Metric(Worker):
     _cache: Dict[Tuple, metrics.MetricWrapperBase] = {}
 
     def set_config(self, config: ValueExtractor) -> None:
-        cfg = config.new_parent(
+        cfg: ValueExtractor = config.new_parent(
             logger=__package__,
             autorun=bool(MULTIPROC_DIR),
             persist=True,
