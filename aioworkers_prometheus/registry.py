@@ -1,13 +1,9 @@
-import logging
 from functools import lru_cache
 from typing import Iterable, Mapping
 
-from prometheus_client import Metric
 from prometheus_client import registry as r
 
 REGISTRY = "REGISTRY"
-
-logger = logging.getLogger(__package__)
 
 
 @lru_cache(None)
@@ -23,7 +19,7 @@ class CollectorWithLabels(r.Collector):
         self._registry = registry
         self._labels = labels
 
-    def collect(self) -> Iterable[Metric]:
+    def collect(self) -> Iterable[r.Metric]:
         for mf in self._registry.collect():
             for sample in mf.samples:
                 sample.labels.update(self._labels)
