@@ -47,6 +47,16 @@ Use in code
         await asyncio.sleep(1)
 
 
+Add global labels to default registry to exposition
+
+.. code-block:: yaml
+
+    prometheus:
+      registry: aioworkers
+      labels:
+        env: prod
+
+
 Serve port 8000 for prometheus
 
 .. code-block:: yaml
