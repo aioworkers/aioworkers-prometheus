@@ -5,7 +5,7 @@ try:
     # true
     from .version import __version__
 except ImportError:
-    __version__ = "dev"
+    __version__ = "0.0.0a"
 
 MULTIPROC_DIR = os.environ.get("PROMETHEUS_MULTIPROC_DIR")
 if not MULTIPROC_DIR:
