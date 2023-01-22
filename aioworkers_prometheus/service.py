@@ -16,9 +16,11 @@ class Service(ExecutorEntity):
 
     def set_config(self, config: ValueExtractor) -> None:
         super().set_config(config)
-        registry = get_registry(self.config.get("registry", REGISTRY))
         if MULTIPROC_DIR:
+            registry = CollectorRegistry()
             MultiProcessCollector(registry)
+        else:
+            registry = get_registry(self.config.get("registry", REGISTRY))
         labels = self.config.get("labels")
         if labels:
             registry = cast(
