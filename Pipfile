@@ -16,7 +16,7 @@ pytest-asyncio = "*"
 isort = "==5.11.5"
 mypy = "==1.1.1"
 flake8 = "==5.0.4"
-black = "==23.1.0"
+black = "==23.3.0"
 
 [requires]
 python_version = "3.7"
