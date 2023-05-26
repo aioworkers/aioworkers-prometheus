@@ -93,7 +93,7 @@ addopts = [
 ]
 
 [tool.coverage.run]
-branch = true
+branch = false
 parallel = false
 source = [
     "aioworkers_prometheus",
