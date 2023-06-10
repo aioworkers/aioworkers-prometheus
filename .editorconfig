@@ -19,9 +19,5 @@ indent_size = 2
 [*.rst]
 indent_size = 2
 
-[*.mk]
-indent_style = tab
-indent_size = 1
-
 [Makefile]
 indent_style = tab
