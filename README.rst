@@ -9,9 +9,11 @@ aioworkers-prometheus
 
 .. image:: https://codecov.io/gh/aioworkers/aioworkers-prometheus/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/aioworkers/aioworkers-prometheus
+  :alt: Coverage
 
 .. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json
   :target: https://github.com/charliermarsh/ruff
+  :alt: Code style: ruff
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
   :target: https://github.com/psf/black
@@ -19,6 +21,7 @@ aioworkers-prometheus
 
 .. image:: https://img.shields.io/badge/types-Mypy-blue.svg
   :target: https://github.com/python/mypy
+  :alt: Code style: Mypy
 
 .. image:: https://readthedocs.org/projects/aioworkers-prometheus/badge/?version=latest
   :target: https://aioworkers-prometheus.readthedocs.io/en/latest/?badge=latest
@@ -26,6 +29,7 @@ aioworkers-prometheus
 
 .. image:: https://img.shields.io/pypi/pyversions/aioworkers-prometheus.svg
   :target: https://pypi.org/project/aioworkers-prometheus
+  :alt: Python versions
 
 .. image:: https://img.shields.io/pypi/dm/aioworkers-prometheus.svg
   :target: https://pypi.org/project/aioworkers-prometheus
