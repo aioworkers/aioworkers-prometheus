@@ -24,7 +24,7 @@ aioworkers-prometheus
   :alt: Code style: Mypy
 
 .. image:: https://readthedocs.org/projects/aioworkers-prometheus/badge/?version=latest
-  :target: https://aioworkers-prometheus.readthedocs.io/en/latest/?badge=latest
+  :target: https://github.com/aioworkers/aioworkers-prometheus#readme
   :alt: Documentation Status
 
 .. image:: https://img.shields.io/pypi/pyversions/aioworkers-prometheus.svg
