@@ -14,6 +14,10 @@ def config_yaml():
         cls: aioworkers_prometheus.metric.Metric
         namespace: aioworkers
         metrics:
+            run:  # ignore metric for exists attr
+                name: run
+                type: counter
+                documentation: Counter for tests
             test_counter:
                 name: test_counter
                 type: counter
