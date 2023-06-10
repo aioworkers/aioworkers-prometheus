@@ -52,6 +52,9 @@ dev-lint = [
     "mypy==1.3.0",
 ]
 
+[project.entry-points.aioworkers]
+prometheus = "aioworkers_prometheus"
+
 [project.urls]
 Homepage = "https://github.com/aioworkers/aioworkers-prometheus"
 Documentation = "https://github.com/aioworkers/aioworkers-prometheus#readme"
