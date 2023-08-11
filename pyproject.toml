@@ -37,7 +37,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 dev-test = [
-    "aioworkers==0.26",
+    "aioworkers==0.27.0",
     "prometheus-client==0.17.1",
     "coverage[toml]==7.2.7",
     "pytest==7.4.0",
