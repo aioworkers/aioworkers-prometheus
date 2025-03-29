@@ -15,30 +15,29 @@ jobs:
       max-parallel: 7
       matrix:
         os:
-          - ubuntu-latest
+          - ubuntu-22.04
         python-version:
-          - '3.7'
-          - '3.9'
           - '3.10'
           - '3.11'
-          - pypy-3.8
+          - '3.12'
+          - '3.13'
           - pypy-3.9
         include:
-          - os: ubuntu-latest
-            python-version: '3.8'
+          - os: ubuntu-22.04
+            python-version: '3.9'
             coverage: true
             lint: true
           - os: macOS-latest
-            python-version: '3.8'
+            python-version: '3.9'
           - os: windows-latest
-            python-version: '3.8'
+            python-version: '3.9'
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5.3.0
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -47,19 +46,11 @@ jobs:
       - name: ruff
         if: ${{ matrix.lint }}
         run: |
-          hatch run lint:ruff check aioworkers_prometheus tests
-      - name: isort
-        if: ${{ matrix.lint }}
-        run: |
-          hatch run lint:isort -c aioworkers_prometheus tests
-      - name: black
-        if: ${{ matrix.lint }}
-        run: |
-          hatch run lint:black --check --diff aioworkers_prometheus tests
+          hatch run lint:style
       - name: mypy
         if: ${{ matrix.lint }}
         run: |
-          hatch run lint:mypy aioworkers_prometheus tests
+          hatch run lint:typing
       - name: Tests with coverage
         run: |
           hatch run cov

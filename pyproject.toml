@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "aioworkers prometheus integration"
 readme = "README.rst"
 license = "Apache-2.0"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 authors = [
     { name = "Alexander Malev", email = "malev@somedev.ru" },
 ]
@@ -23,33 +23,31 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    "aioworkers>=0.12.0",
+    "aioworkers>=0.28",
     "prometheus-client>=0.14",
 ]
 [project.optional-dependencies]
 dev-test = [
-    "aioworkers==0.27.0",
+    "aioworkers==0.28.0",
     "prometheus-client==0.17.1",
-    "coverage[toml]==7.2.7",
-    "pytest==7.4.3",
-    "pytest-aioworkers[aiohttp]==0.4",
-    "pytest-mock==3.11.1",
-    "pyyaml==6.0.1",
+    "coverage[toml]==7.7.1",
+    "pytest==8.3.5",
+    "pytest-aioworkers[asyncio]==0.5.0",
+    "pytest-mock==3.14.0",
+    "pyyaml==6.0.2",
 ]
 dev-lint = [
-    "ruff==0.5.1",
-    "isort==5.13.2",
-    "black==24.3.0",
-    "mypy==1.9.0",
+    "ruff==0.11.2",
+    "mypy==1.15.0",
 ]
 
 [project.entry-points.aioworkers]
@@ -81,15 +79,16 @@ cov = [
 
 [[tool.hatch.envs.all.matrix]]
 python = [
-    "3.7",
-    "3.8",
     "3.9",
     "3.10",
     "3.11",
+    "3.12",
+    "3.13",
 ]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 testpaths = [
     "aioworkers_prometheus",
     "tests",
@@ -113,49 +112,62 @@ exclude_lines = [
     "if TYPE_CHECKING:",
 ]
 
-[tool.black]
+[tool.ruff]
 line-length = 120
-target-version = [
-    "py37",
-    "py38",
-    "py39",
-    "py310",
-    "py311",
+indent-width = 4
+target-version = "py39"
+
+[tool.ruff.lint]
+extend-select = [
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # pyupgrade
+  # "UP",
+  # flake8-bugbear
+  "B",
+  # flake8-simplify
+  # "SIM",
+  # isort
+  "I",
+]
+extend-ignore = [
+    "E501",
 ]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-force_single_line = false
-import_heading_localfolder = true
-include_trailing_comma = true
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [tool.mypy]
 follow_imports = "silent"
 strict_optional = true
 warn_redundant_casts = true
-ignore_missing_imports = true
 check_untyped_defs = true
 
-[tool.ruff]
-line-length = 120
+[[tool.mypy.overrides]]
+module = [
+    "pytest",
+]
+ignore_missing_imports = true
 
 [tool.hatch.envs.lint]
-python = "3.8"
+python = "3.9"
 features = [
     "dev-lint",
 ]
 [tool.hatch.envs.lint.scripts]
 typing = "mypy --install-types --non-interactive {args:aioworkers_prometheus tests}"
 style = [
-    "ruff {args:aioworkers_prometheus tests}",
-    "isort --check-only --diff {args:aioworkers_prometheus tests}",
-    "black --check --diff {args:aioworkers_prometheus tests}",
+    "ruff check {args:aioworkers_prometheus tests}",
+    "ruff format --check --diff {args:aioworkers_prometheus tests}",
 ]
 fmt = [
-    "ruff --fix {args:aioworkers_prometheus tests}",
-    "isort {args:aioworkers_prometheus tests}",
-    "black {args:aioworkers_prometheus tests}",
+    "ruff check --fix {args:aioworkers_prometheus tests}",
+    "ruff format {args:aioworkers_prometheus tests}",
     "style",
 ]
 all = [

@@ -1,8 +1,9 @@
 import os
 import tempfile
+from urllib.request import urlopen
 
 import pytest
-from aiohttp import client
+from aioworkers.core.context import Context
 
 import aioworkers_prometheus.service
 
@@ -21,13 +22,12 @@ def config_yaml(unused_tcp_port_factory):
     """
 
 
-async def test_port(context):
+async def test_port(context: Context):
     assert context.prometheus is not None
     url = f"http://localhost:{context.prometheus.config.port}"
-    async with client.ClientSession() as session:
-        async with session.get(url) as r:
-            assert r.status == 200, await r.text()
-            data = await r.read()
+    r = await context.loop.run_in_executor(None, urlopen, url)
+    assert r.status == 200, r.read()
+    data = r.read()
     assert data
 
 
