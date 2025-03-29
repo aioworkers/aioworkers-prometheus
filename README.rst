@@ -15,10 +15,6 @@ aioworkers-prometheus
   :target: https://github.com/charliermarsh/ruff
   :alt: Code style: ruff
 
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-  :target: https://github.com/psf/black
-  :alt: Code style: black
-
 .. image:: https://img.shields.io/badge/types-Mypy-blue.svg
   :target: https://github.com/python/mypy
   :alt: Code style: Mypy
@@ -32,7 +28,7 @@ aioworkers-prometheus
   :alt: Python versions
 
 .. image:: https://img.shields.io/pypi/dm/aioworkers-prometheus.svg
-  :target: https://pypi.org/project/aioworkers-prometheus
+  :target: https://pypistats.org/packages/aioworkers-prometheus
 
 .. image:: https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg
   :alt: Hatch project
